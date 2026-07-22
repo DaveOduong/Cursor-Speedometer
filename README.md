@@ -1,23 +1,23 @@
-# 🖱️ Cursor Speedometer
+##Cursor Speedometer
 
 A lightweight web application that measures your mouse cursor's movement speed in real time. As you move the cursor across the screen, the application calculates its speed in **pixels per second (px/s)** and records the highest speed reached during the session.
 
 ---
 
-## 📖 Overview
+## Overview
 
 Cursor Speedometer tracks the position of your mouse and continuously calculates how fast it is moving by measuring the distance traveled between consecutive mouse events.
 
 The application displays:
 
-- ⚡ Current cursor speed
-- 🚀 Maximum speed reached during the session
+- Current cursor speed
+- Maximum speed reached during the session
 
 The interface is minimal, responsive, and updates smoothly in real time.
 
 ---
 
-## ✨ Features
+## Features
 
 - Real-time cursor speed measurement
 - Displays speed in **pixels per second (px/s)**
@@ -30,7 +30,7 @@ The interface is minimal, responsive, and updates smoothly in real time.
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - HTML5
 - CSS3
@@ -38,7 +38,7 @@ The interface is minimal, responsive, and updates smoothly in real time.
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 The application listens for mouse movement events across the browser window.
 
@@ -63,7 +63,7 @@ The speed is displayed instantly, while the highest recorded speed is saved unti
 
 ---
 
-## 📐 Formula Used
+## Formula Used
 
 ```
 Distance = √((x₂ − x₁)² + (y₂ − y₁)²)
@@ -73,7 +73,7 @@ Speed = Distance / Time
 
 ---
 
-## 📊 Displayed Information
+## Displayed Information
 
 | Metric | Description |
 |---------|-------------|
@@ -82,7 +82,7 @@ Speed = Distance / Time
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
 1. Download the project files.
 2. Open `index.html` in any modern web browser.
@@ -93,7 +93,7 @@ No installation or internet connection is required.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 CursorSpeedometer/
@@ -104,7 +104,7 @@ CursorSpeedometer/
 
 ---
 
-## 🎯 Example
+## Example
 
 If your cursor moves:
 
@@ -131,7 +131,7 @@ Max Speed: 3,000 px/s
 
 ---
 
-## 💡 Future Improvements
+## Future Improvements
 
 - Speed graph over time
 - Average cursor speed
@@ -146,7 +146,7 @@ Max Speed: 3,000 px/s
 
 ---
 
-## 🎓 Educational Value
+## Educational Value
 
 This project demonstrates:
 
@@ -161,12 +161,12 @@ This project demonstrates:
 
 ---
 
-## 📄 License
+## License
 
 This project is free to use for educational and personal purposes.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 Created as a web-based JavaScript project demonstrating real-time mouse movement tracking and speed calculation using browser event handling and animation techniques.
