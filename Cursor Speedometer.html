@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Speedometer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #0f172a;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+    .card {
+      background: #1e293b;
+      padding: 2.5rem 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    h1 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+    .speed-display {
+      font-size: 4rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: #38bdf8;
+      margin-bottom: 0.25rem;
+    }
+    .unit {
+      font-size: 1rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .max-speed {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #cbd5e1;
+    }
+    .max-speed span {
+      color: #f43f5e;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Cursor Speed</h1>
+    <div class="speed-display" id="speed">0</div>
+    <div class="unit">px / sec</div>
+    <div class="max-speed">Max Speed: <span id="max-speed">0</span> px/s</div>
+  </div>
+  <script>
+    let lastX = 0;
+    let lastY = 0;
+    let lastTime = performance.now();
+    let currentSpeed = 0;
+    let maxSpeed = 0;
+    let hasFirstEvent = false; // guards against a bogus delta from the (0,0)/load-time defaults
+    const speedEl = document.getElementById('speed');
+    const maxSpeedEl = document.getElementById('max-speed');
+    window.addEventListener('mousemove', (e) => {
+      const currentTime = performance.now();
+
+      if (!hasFirstEvent) {
+        // First real event: just record position/time, don't compute a delta yet.
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastTime = currentTime;
+        hasFirstEvent = true;
+        return;
+      }
+
+      const deltaTime = (currentTime - lastTime) / 1000; // Convert ms to seconds
+      if (deltaTime > 0) {
+        const deltaX = e.clientX - lastX;
+        const deltaY = e.clientY - lastY;
+
+        // Calculate Euclidean distance: sqrt(dx^2 + dy^2)
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        currentSpeed = Math.round(distance / deltaTime);
+        if (currentSpeed > maxSpeed) {
+          maxSpeed = currentSpeed;
+          maxSpeedEl.textContent = maxSpeed.toLocaleString();
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastTime = currentTime;
+      }
+    });
+    // Smoothly decay speed to zero when movement stops
+    function updateLoop() {
+      const now = performance.now();
+      // If no mousemove event fired for 100ms, reset speed to 0
+      if (now - lastTime > 100) {
+        currentSpeed = 0;
+      }
+
+      speedEl.textContent = currentSpeed.toLocaleString();
+      requestAnimationFrame(updateLoop);
+    }
+    requestAnimationFrame(updateLoop);
+  </script>
+</body>
+</html>
